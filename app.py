@@ -130,6 +130,7 @@ def tick_viagem():
         a = math.sin(d_phi/2)**2 + math.cos(phi1)*math.cos(phi2)*math.sin(d_lambda/2)**2
         return 2 * R * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
+
     status_atual = viagem_ativa['status']
     novo_status = status_atual
 
