@@ -7,8 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 # --- CONFIGURAÇÃO DA API DE ROTAS ---
-# !! Lembre-se de usar uma chave de API válida e recente !!
-ORS_API_KEY = '5b3ce3597851110001cf6248ea01d6f87be74e5db04e3e7a05dd9e4f' 
+ORS_API_KEY = '5b3ce3597851110001cf6248ea01d6f87be74e5db04e3e7a05dd9e4f'
 ors_client = openrouteservice.Client(key=ORS_API_KEY)
 
 # --- BANCO DE DADOS EM MEMÓRIA ---
@@ -118,7 +117,7 @@ def tick_viagem():
     if not viagem_ativa or viagem_ativa.get('finalizado', False): return jsonify({'status': 'sem_viagem'})
 
     # ATUALIZADO: Pulo menor para aumentar a precisão da simulação
-    pulo_simulacao = 23
+    pulo_simulacao = 45
     viagem_ativa['simulation_index'] = min(viagem_ativa['simulation_index'] + pulo_simulacao, len(viagem_ativa['route_coordinates']) - 1)
     
     index = viagem_ativa['simulation_index']
