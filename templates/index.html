@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Painel de Viagem{% endblock %}
+
+{% block content %}
+<div class="h-full flex flex-col gap-6">
+    <h2 class="text-3xl font-bold">Painel da Viagem</h2>
+    <div id="status-container" class="bg-white p-4 rounded-lg shadow-md">
+        <p class="text-gray-500">Carregando status da viagem...</p>
+    </div>
+    <div class="flex-1 bg-white rounded-lg shadow-md overflow-hidden">
+        <div id="map"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/map_logic.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Criar Veículo{% endblock %}
+
+{% block content %}
+<!-- A classe foi atualizada para w-full e max-w-3xl -->
+<div class="w-full max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6">Cadastrar Novo Veículo</h2>
+    <form id="form-veiculo" class="space-y-4">
+        <div>
+            <label for="placa" class="block text-sm font-medium text-gray-700 mb-1">Placa</label>
+            <input type="text" id="placa" placeholder="AAA-1234" class="w-full p-3 border border-gray-300 rounded-lg" required>
+        </div>
+        <div>
+            <label for="modelo" class="block text-sm font-medium text-gray-700 mb-1">Modelo</label>
+            <input type="text" id="modelo" placeholder="Ex: Scania R450" class="w-full p-3 border border-gray-300 rounded-lg" required>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors">Salvar Veículo</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/forms.js') }}"></script>
+{% endblock %}
