@@ -72,7 +72,6 @@ ORS_API_KEY = 'SUA_CHAVE_API_AQUI'
 
 por sua chave real da OpenRouteService.
 
-**Atenção:** Nunca exponha sua chave em repositórios públicos. Em produção, use variáveis de ambiente.
 
 ### 4. Rodar o servidor
 

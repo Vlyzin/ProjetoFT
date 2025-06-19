@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 # --- CONFIGURAÇÃO DA API DE ROTAS ---
-ORS_API_KEY = '5b3ce3597851110001cf6248ea01d6f87be74e5db04e3e7a05dd9e4f'
+ORS_API_KEY = ''
 ors_client = openrouteservice.Client(key=ORS_API_KEY)
 
 # --- BANCO DE DADOS EM MEMÓRIA ---
@@ -73,9 +73,8 @@ def create_viagem():
         if not all([veiculo, origem, destino]): 
             return jsonify({'status': 'erro', 'mensagem': 'Um dos IDs fornecidos não foi encontrado.'}), 404
 
-        ponto_partida_sp = (-46.633999737460684, -23.55040577221674) # (lon, lat)
+        ponto_partida_sp = (-46.633999737460684, -23.55040577221674)
         
-        # ATUALIZADO: Calcula a rota APENAS para o primeiro estágio (SP -> Origem)
         coords_estagio_1 = (ponto_partida_sp, (origem['lon'], origem['lat']))
         
         routes = ors_client.directions(coordinates=coords_estagio_1, profile='driving-hgv', format='geojson')
@@ -88,7 +87,6 @@ def create_viagem():
         print(f"ERRO AO CRIAR VIAGEM: {e}")
         return jsonify({'status': 'erro', 'mensagem': 'Não foi possível calcular a rota inicial.'}), 500
 
-    # ATUALIZADO: A estrutura da viagem agora inclui um 'stage'
     viagem_ativa = {
         'veiculo': veiculo, 'origem': origem, 'destino': destino, 'status': 'A CAMINHO DA ORIGEM',
         'ponto_partida_sp': {'lat': ponto_partida_sp[1], 'lon': ponto_partida_sp[0]},
@@ -116,7 +114,6 @@ def get_viagem_ativa():
 def tick_viagem():
     if not viagem_ativa or viagem_ativa.get('finalizado', False): return jsonify({'status': 'sem_viagem'})
 
-    # ATUALIZADO: Pulo menor para aumentar a precisão da simulação
     pulo_simulacao = 45
     viagem_ativa['simulation_index'] = min(viagem_ativa['simulation_index'] + pulo_simulacao, len(viagem_ativa['route_coordinates']) - 1)
     
@@ -133,7 +130,6 @@ def tick_viagem():
         a = math.sin(d_phi/2)**2 + math.cos(phi1)*math.cos(phi2)*math.sin(d_lambda/2)**2
         return 2 * R * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
-    # ATUALIZADO: Lógica de status agora considera os estágios da viagem
     status_atual = viagem_ativa['status']
     novo_status = status_atual
 

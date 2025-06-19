@@ -2,12 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const API_URL = 'http://127.0.0.1:5000/api';
     let map;
     let truckMarker;
-    let routePolyline; // Variável para a linha que conecta os pontos
+    let routePolyline;
     let simulationInterval = null;
 
-    /**
-     * Inicializa o mapa Leaflet na página.
-     */
+
     function initMap() {
         map = L.map('map').setView([0, 0], 2);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -46,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * O loop principal que pede a nova posição ao backend a cada 5 segundos.
      */
     function startPositionPolling() {
         if (simulationInterval) clearInterval(simulationInterval);
@@ -72,18 +69,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 .addTo(map)
                 .bindPopup(`<b>Posição:</b><br>Lat: ${data.lat.toFixed(6)}<br>Lon: ${data.lon.toFixed(6)}`);
 
-                // Adiciona o novo ponto à linha
+
                 if (routePolyline) {
                     routePolyline.addLatLng(newPosition);
                 }
 
-                // Atualiza o texto do status dinamicamente
                 const statusBadge = document.getElementById('trip-status-badge');
                 if (statusBadge) {
                     statusBadge.textContent = data.status.replace(/_/g, ' ');
                 }
 
-                // Se a viagem terminou, mostra o botão de finalizar
                 if (data.finalizado) {
                     clearInterval(simulationInterval);
                     const actionArea = document.getElementById('action-area');
@@ -116,13 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const origemCoords = [viagem.origem.lat, viagem.origem.lon];
                 const destinoCoords = [viagem.destino.lat, viagem.destino.lon];
 
-                // Desenha os raios e rótulos
                 L.circle(origemCoords, { radius: 500, color: 'blue' }).addTo(map)
                     .bindTooltip("Origem", { permanent: true, direction: 'top' }).openTooltip();
                 L.circle(destinoCoords, { radius: 500, color: 'green' }).addTo(map)
                     .bindTooltip("Destino", { permanent: true, direction: 'top' }).openTooltip();
                 
-                // Cria o caminhão e adiciona o popup com a placa
                 const truckIcon = L.icon({
                     iconUrl: '/static/img/truck-icon.png',
                     iconSize: [40, 40], iconAnchor: [20, 20]
