@@ -1,0 +1,20 @@
+[
+    {
+        "id": 3,
+        "nome": "Origem Exemplo - SP",
+        "tipo": "Origem",
+        "cidade": "Cajamar",
+        "estado": "São Paulo",
+        "lat": -23.328993161533933,
+        "lon": -46.841921395534990
+    },
+    {
+        "id": 4,
+        "nome": "Destino Exemplo - SP",
+        "tipo": "Destino",
+        "cidade": "Guarulhos",
+        "estado": "São Paulo",
+        "lat": -23.425791025373414,
+        "lon": -46.38483443838726
+    }
+]

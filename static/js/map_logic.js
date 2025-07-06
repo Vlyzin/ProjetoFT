@@ -29,11 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function createStatusBar(viagem) {
         const statusContainer = document.getElementById('status-container');
+        const statusColors = { /* ... */ };
         const statusClass = statusColors[viagem.status] || 'bg-gray-100';
 
+    // ATUALIZADO: layout com 5 colunas e adicionado o campo do motorista
         statusContainer.innerHTML = `
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 items-center">
                 <div><strong>Placa:</strong> ${viagem.veiculo.placa}</div>
+                <div><strong>Motorista:</strong> ${viagem.motorista.nome}</div>
                 <div><strong>Origem:</strong> ${viagem.origem.nome}</div>
                 <div><strong>Destino:</strong> ${viagem.destino.nome}</div>
                 <div class="flex items-center">
@@ -44,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
             <div id="action-area" class="mt-4 text-right"></div>
-        `;
-    }
+    `;
+}
     
     /**
      * ATUALIZADO: Função dedicada para atualizar o badge de status (texto e cor).
@@ -118,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (data.finalizado) {
                     clearInterval(simulationInterval);
-                    // ATUALIZADO: Chama a nova função para criar o botão
                     createFinalizeButton();
                 }
             } catch (error) {
@@ -139,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Object.keys(viagem).length > 0) {
                 createStatusBar(viagem);
 
-                const spCoords = [viagem.ponto_partida_sp.lat, viagem.ponto_partida_sp.lon];
+                const spCoords = [viagem.ponto_partida.lat, viagem.ponto_partida.lon];
                 const origemCoords = [viagem.origem.lat, viagem.origem.lon];
                 const destinoCoords = [viagem.destino.lat, viagem.destino.lon];
 
@@ -170,12 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 map.fitBounds([spCoords, origemCoords, destinoCoords], { padding: [50, 50] });
 
-                // ATUALIZADO: Lógica para decidir se inicia o polling ou se já finaliza
                 if (viagem.status === 'NO DESTINO') {
-                    // Se a viagem já está no destino ao carregar, apenas cria o botão
                     createFinalizeButton();
                 } else {
-                    // Se não, inicia a simulação
                     startPositionPolling();
                 }
 

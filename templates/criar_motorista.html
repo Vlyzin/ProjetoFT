@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Criar Motorista{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6">Cadastrar Novo Motorista</h2>
+    <form id="form-motorista" class="space-y-4">
+        <div>
+            <label for="nome-motorista" class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
+            <input type="text" id="nome-motorista" placeholder="Ex: João da Silva" class="w-full p-3 border border-gray-300 rounded-lg" required>
+        </div>
+        <div>
+            <label for="cpf-motorista" class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
+            <input type="text" id="cpf-motorista" placeholder="000.000.000-00" class="w-full p-3 border border-gray-300 rounded-lg" required>
+        </div>
+        <div>
+            <label for="sexo-motorista" class="block text-sm font-medium text-gray-700 mb-1">Sexo</label>
+            <select id="sexo-motorista" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                <option value="" disabled selected>Selecione...</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Outro">Outro</option>
+            </select>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-cyan-700 transition-colors">Salvar Motorista</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/forms.js') }}"></script>
+{% endblock %}

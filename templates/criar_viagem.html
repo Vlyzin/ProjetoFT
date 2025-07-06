@@ -7,6 +7,12 @@
     <h2 class="text-2xl font-bold mb-6">Criar Nova Viagem</h2>
     <form id="form-viagem" class="space-y-6">
         <div>
+            <label for="viagem-motorista" class="block text-sm font-medium text-gray-700 mb-1">Selecione o Motorista</label>
+            <select id="viagem-motorista" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                <option value="">Carregando motoristas...</option>
+        </select>
+        </div>
+        <div>
             <label for="viagem-veiculo" class="block text-sm font-medium text-gray-700 mb-1">Selecione o Veículo</label>
             <select id="viagem-veiculo" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" required>
                 <option value="">Carregando veículos...</option>

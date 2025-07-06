@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nome": "Exemplo da Silva",
+        "cpf": "139.314.410-16",
+        "sexo": "Masculino"
+    },
+    {
+        "id": 2,
+        "nome": "Maria Oliveira",
+        "cpf": "123.456.789-00",
+        "sexo": "Feminino"
+    },
+    {
+        "id": 3,
+        "nome": "João Pereira",
+        "cpf": "987.654.321-00",
+        "sexo": "Masculino"
+    },
+    {
+        "id": 4,
+        "nome": "Ana Costa",
+        "cpf": "111.222.333-44",
+        "sexo": "Feminino"
+    }
+]

@@ -4,27 +4,41 @@ Sistema web completo para criação, simulação e monitoramento de viagens log�
 
 ---
 
+## Log de Atualizações Recentes
+
+### Atualização de 05/07/2024: Persistência de Dados e Melhorias de Usabilidade
+
+- **Persistência de Dados com JSON:** Dados de veículos, locais e motoristas agora são salvos em arquivos `.json` na pasta `/json`, simulando um banco de dados local. Planeja-se a migração para PostgreSQL futuramente.
+- **Validação de Dados Duplicados:** Placas, nomes de locais e CPFs agora são validados para evitar duplicatas.
+- **Simulação Contínua e Persistente:** A simulação agora é gerenciada pelo backend e continua mesmo com navegação ou atualização de página.
+- **Ponto de Partida Dinâmico:** A viagem inicia no centro do estado do local de origem.
+- **Melhorias na Interface de Cadastro:**
+  - Seleção de estado com busca (Tom Select).
+  - Exibição de nome + CPF no dropdown de motoristas.
+  - Validação robusta de CPF (máscara, formato e dígito verificador).
+
+---
+
 ## Principais Funcionalidades
 
-- Cadastro de Entidades:
-  - Veículos: Cadastro por placa e modelo.
-  - Locais: Nome, tipo (Origem/Destino) e coordenadas (Latitude/Longitude).
+- **Cadastro de Entidades:**
+  - Veículos: Placa e modelo.
+  - Locais: Nome, tipo (Origem/Destino) e coordenadas.
+  - Motoristas: Nome, CPF e sexo, com validação completa.
 
-- Criação de Viagens:
-  - Selecione um veículo, origem e destino para iniciar uma nova viagem.
+- **Criação de Viagens:**
+  - Escolha de veículo, motorista, origem e destino.
 
-- Simulação Realista de Rota:
-  - Usa a API da OpenRouteService para calcular rotas otimizadas para caminhões.
-  - Simulação é controlada pelo backend para performance e estabilidade.
+- **Simulação Realista de Rota:**
+  - Uso da API da OpenRouteService para rotas otimizadas.
+  - Backend controla a lógica de simulação.
 
-- Painel Interativo em Tempo Real:
-  - Mapa Dinâmico (Leaflet.js) mostrando o trajeto.
-  - Movimento do Caminhão: Atualização a cada 5 segundos.
-  - Status Dinâmico: (A CAMINHO DA ORIGEM, NA ORIGEM, EM TRÂNSITO, NO DESTINO).
-  - Rastro Visível: Posições salvas no mapa com popups clicáveis.
-  - Trajetória Contínua: Linha ligando os pontos do trajeto.
-  - Persistência Visual: Mesmo após atualizar a página.
-  - Popups Interativos: Caminhão exibe a placa, pontos mostram coordenadas.
+- **Painel Interativo em Tempo Real:**
+  - Mapa com trajeto da viagem (Leaflet.js).
+  - Atualização a cada 5 segundos.
+  - Status dinâmico da viagem.
+  - Histórico e rastro no mapa com popups interativos.
+  - Persistência mesmo após refresh da página.
 
 ---
 
@@ -41,14 +55,16 @@ Sistema web completo para criação, simulação e monitoramento de viagens log�
 - CSS3 + Tailwind CSS
 - JavaScript (ES6+)
 - Leaflet.js
+- Tom Select
 
 ---
 
 ## Como Executar o Projeto Localmente
 
 ### 1. Pré-requisitos
+
 - Python 3 instalado
-- pip funcionando
+- `pip` funcionando
 - Chave da API da [OpenRouteService](https://openrouteservice.org/dev/#/signup)
 
 ### 2. Instalação
@@ -57,6 +73,9 @@ Sistema web completo para criação, simulação e monitoramento de viagens log�
 # Clone o projeto
 git clone https://github.com/Vlyzin/ProjetoFT.git
 cd ProjetoFT
+
+# Crie a pasta para os arquivos JSON
+mkdir json
 
 # Instale as dependências
 pip install -r requirements.txt
@@ -72,44 +91,43 @@ ORS_API_KEY = 'SUA_CHAVE_API_AQUI'
 
 por sua chave real da OpenRouteService.
 
-
 ### 4. Rodar o servidor
 
 ```bash
 python app.py
 ```
 
-Acesse: http://127.0.0.1:5000
+Acesse: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ---
 
 ## Fluxo de Uso
 
-1. Cadastrar Veículo: Vá até "Veículos" e adicione um novo.
-2. Cadastrar Locais: Adicione pelo menos uma origem e um destino.
-3. Criar Viagem: Selecione veículo, origem e destino. Inicie.
-4. Painel Principal: Veja o caminhão se mover e o status atualizar.
-5. Finalizar Viagem: Ao chegar ao destino, finalize a simulação.
+1. Cadastrar Veículo e Motorista: Use os menus laterais.
+2. Cadastrar Locais: Adicione uma origem e um destino.
+3. Criar Viagem: Escolha os dados e inicie a simulação.
+4. Painel Principal: Acompanhe o trajeto em tempo real.
+5. Finalizar Viagem: Ao chegar ao destino, finalize.
 
 ---
 
 ## Próximos Passos (Roadmap)
 
-- Autenticação de Usuários
-- Banco de Dados (SQLite/PostgreSQL)
-- CRUD completo de Locais
-- Monitoramento Múltiplo de Viagens
-- Geração de Relatórios de Viagens
-- Tradução PT/EN na Interface
+- Autenticação de Usuários (login/cadastro)
+- Migração para PostgreSQL
+- CRUD completo de entidades
+- Monitoramento de múltiplas viagens simultâneas
+- Geração de relatórios
+- Tradução da interface (PT/EN)
 
 ---
 
 ## Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
 ## Contribuições
 
-Sugestões, melhorias e pull requests são bem-vindos.
+Sugestões, melhorias e pull requests são muito bem-vindos!
