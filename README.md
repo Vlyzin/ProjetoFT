@@ -6,7 +6,7 @@ Sistema web completo para criação, simulação e monitoramento de viagens log�
 
 ## Log de Atualizações Recentes
 
-### Atualização de 05/07/2024: Persistência de Dados e Melhorias de Usabilidade
+### Atualização de 05/07/2025: Persistência de Dados e Melhorias de Usabilidade
 
 - **Persistência de Dados com JSON:** Dados de veículos, locais e motoristas agora são salvos em arquivos `.json` na pasta `/json`, simulando um banco de dados local. Planeja-se a migração para PostgreSQL futuramente.
 - **Validação de Dados Duplicados:** Placas, nomes de locais e CPFs agora são validados para evitar duplicatas.
